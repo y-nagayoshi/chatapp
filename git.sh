@@ -6,5 +6,5 @@ echo ${comment}
 git init
 git status
 git add -A
-git commit -m '${comment}'
+git commit -m '`${comment}`'
 git push -u origin main
