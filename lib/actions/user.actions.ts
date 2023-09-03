@@ -55,3 +55,16 @@ export async function fetchUser(userId: string) {
         throw new Error(`Failed to fetch user: ${error.message}`)
     }
 }
+
+export async function fetchUserPosts(userId:string){
+    try {
+        connectToDB();
+
+        const threads = await User.findOne({id: userId})
+        .populate({
+            path: 'children'
+        })
+    } catch (error) {
+
+    }
+}

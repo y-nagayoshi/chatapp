@@ -31,6 +31,7 @@ import { updateUser } from '@/lib/actions/user.actions';
 
 import * as z from "zod";
 import { usePathname, useRouter } from 'next/navigation';
+import { createThread } from '@/lib/actions/thread.actions';
 
 interface Props {
     user: {
@@ -57,8 +58,15 @@ interface Props {
     const router = useRouter();
     const pathname = usePathname();
 
-    const onSubmit = () => {
-        
+    const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
+        await createThread({
+            text: values.thread,
+            author: userId,
+            communityId: null,
+            path: pathname
+        });
+
+        router.push('/')
     }
 
     return (
