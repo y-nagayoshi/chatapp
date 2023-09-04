@@ -13,15 +13,15 @@ async function Page() {
 
     if(!userInfo?.onboarded) redirect('/onboarding');
 
-    const activity = await getActivity(userInfo._id);
+    const activities = await getActivity(userInfo._id);
     
     return (
         <section>
             <h1 className="head-text mb-10">Activity</h1>
             <section className="mt-10 flex flex-col gap-5">
-            {activity?.length > 0 ? (
+            {activities?.length ?? 0 > 0 ? (
                 <>
-                {activity?.map((activity) => (
+                {activities?.map((activity) => (
                     <Link key={activity._id} href={`/thread/${activity.parentId}`}>
                         <article className="activity-card">
                             <Image 
@@ -31,11 +31,17 @@ async function Page() {
                                 height={20}
                                 className="rounded-full object-cover"
                             />
+                            <p className="!text-small-regular text-light-1">
+                                <span className="mr-1 text-primary-500">
+                                    {activity.author.name}
+                                </span>{" "}
+                                replied to your thread
+                            </p>
                         </article>
                     </Link>
                 ))}
                 </>        
-            ) : <p>No activity yet</p>
+            ) : <p className='!text-base-regular text-light-3'>No activity yet</p>
             }
             </section>
         </section>
