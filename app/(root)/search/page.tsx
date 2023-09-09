@@ -20,6 +20,7 @@ async function Page() {
         pageNumber: 1,
         pageSize: 25
     });
+    
     return (
         <section>
             <h1 className="head-text mb-10">Search</h1>
